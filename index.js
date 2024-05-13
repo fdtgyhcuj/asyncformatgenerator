@@ -1,7 +1,10 @@
-function lowestCommonAncestor(root, p, q) {
-  if (!root || root === p || root === q) return root;
-  const left = lowestCommonAncestor(root.left, p, q);
-  const right = lowestCommonAncestor(root.right, p, q);
-  if (left && right) return root;
-  return left ? left : right;
-}
+const pullAtValue = (arr, pullArr) => {
+  let removed = [],
+    pushToRemove = arr.forEach((v, i) =>
+      pullArr.includes(v) ? removed.push(v) : v,
+    ),
+    mutateTo = arr.filter((v, i) => !pullArr.includes(v));
+  arr.length = 0;
+  mutateTo.forEach((v) => arr.push(v));
+  return removed;
+};
